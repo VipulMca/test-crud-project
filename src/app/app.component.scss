@@ -1,0 +1,581 @@
+.list-of-user-area {
+
+    .search-area {
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+
+        padding: {
+            top: 20px;
+            bottom: 20px;
+        }
+
+        ;
+
+        input {
+            height: 35px;
+            border-radius: 5px;
+            border: 1px solid;
+            max-width: 350px;
+        }
+
+        input::placeholder {
+            font-size: 15px;
+        }
+
+        input:focus::placeholder {
+            color: #961de7;
+        }
+
+        button {
+            margin-right: 20px;
+
+        }
+    }
+
+    .table {
+        table-layout: fixed;
+        display: table;
+        overflow: auto;
+
+        thead {
+            background-color: #e7f3ff;
+            padding: 20px;
+
+            tr {
+                th {
+                    font-size: 16px;
+                    padding: 20px 15px;
+                    align-items: center;
+                    font-weight: 600;
+                    letter-spacing: 1px;
+                    color: #4a4747;
+                    font-family: 'Questrial', sans-serif;
+                }
+
+                th:first-child {
+                    width: 100px;
+                }
+
+                th:nth-child(6) {
+                    i[title]:hover {
+                        content: attr(title);
+                        background-color: #de0f0f;
+                    }
+                }
+
+                th:last-child {
+                    text-align: center;
+
+                }
+            }
+        }
+
+        tbody {
+            tr {
+                td {
+
+                    padding: 30px 15px;
+                    border: none;
+                    font-family: 'Questrial', sans-serif;
+                    font-size: 16px;
+                    word-break: break-all;
+                    word-wrap: break-word;
+                }
+
+                td:nth-child(1) {
+                    img {
+                        width: 60px;
+                        height: 60px;
+                        border: 5px solid purple;
+                        border-radius: 30px;
+                    }
+
+                }
+
+                td:last-child {
+                    cursor: pointer;
+                    text-align: center;
+
+                    .glowingBtn {
+                        color: #FFFFFF;
+                        border-radius: 60px*0.5;
+
+                        padding: {
+                            left: 15px;
+                            right: 15px;
+                            top: 10px;
+                            bottom: 10px;
+                        }
+
+                        background:#090979;
+                        outline: none;
+                        transition: transform .2s;
+
+                    }
+
+                    .glowingBtn:hover {
+                        background: linear-gradient(120deg, #f857a6, #ff5858);
+                        -ms-transform: scale(1.5);
+                        -webkit-transform: scale(1.5);
+                        transform: scale(1.5);
+
+                        margin: {
+                            left: 10px;
+                            right: 10px;
+                        }
+
+                        ;
+                        // i:hover {
+
+                        // }
+                    }
+                }
+            }
+        }
+    }
+
+    .cssForPagination {
+        font-size: 14px;
+        font-family: 'Questrial', sans-serif;
+        letter-spacing: 1px;
+        float: right;
+    }
+}
+
+/////////////// add user css
+.buttons {
+    text-align: center;
+    border-radius: 20px;
+
+}
+
+.blob-btn {
+    $numOfBlobs: 4;
+    z-index: 1;
+    position: relative;
+    padding: 15px 46px;
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #0505A9;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    transition: color 0.5s;
+    cursor: pointer;
+    border-radius: 30px;
+
+    &:before {
+        content: "";
+        z-index: 1;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        border: 2px solid #0505A9;
+        border-radius: 30px;
+    }
+
+    &:after {
+        content: "";
+        z-index: -2;
+        position: absolute;
+        left: 2px*1.5;
+        top: 2px*1.5;
+        width: 100%;
+        height: 100%;
+
+        transition: all 0.3s 0.2s;
+        border-radius: 30px;
+    }
+
+    &:hover {
+        color: #FFFFFF;
+        border-radius: 30px;
+
+        &:after {
+            transition: all 0.3s;
+            left: 0;
+            top: 0;
+            border-radius: 30px;
+        }
+    }
+
+    &__inner {
+        z-index: -1;
+        overflow: hidden;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 30px;
+        background: #ffffff;
+    }
+
+    &__blobs {
+        position: relative;
+        display: block;
+        height: 100%;
+        filter: url('#goo');
+    }
+
+    &__blob {
+        position: absolute;
+        top: 2px;
+        width: 100% / $numOfBlobs;
+        height: 100%;
+        background: #0505A9;
+        border-radius: 100%;
+        transform: translate3d(0, 150%, 0) scale(1.7);
+        transition: transform 0.45s;
+
+        @supports(filter: url('#goo')) {
+            transform: translate3d(0, 150%, 0) scale(1.4);
+        }
+
+        @for $i from 1 through $numOfBlobs {
+            &:nth-child(#{$i}) {
+                left: ($i - 1) * (120% / $numOfBlobs);
+                transition-delay: ($i - 1) * 0.08s;
+            }
+        }
+
+        .blob-btn:hover & {
+            transform: translateZ(0) scale(1.7);
+
+            @supports(filter: url('#goo')) {
+                transform: translateZ(0) scale(1.4);
+            }
+        }
+    }
+
+}
+
+////////////////////////// search css
+.container {
+    width: 300px;
+    height: 50px;
+    position: absolute;
+    right: 200px;
+
+    .search {
+        position: absolute;
+
+        top: 5px;
+        right: 10px;
+        bottom: 0;
+        width: 40px;
+        height: 40px;
+        background: #090979;
+        border-radius: 50%;
+        transition: all 1s;
+        z-index: 4;
+        box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.4);
+
+        // box-shadow: 0 0 25px 0 crimson;
+        &:hover {
+            cursor: pointer;
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            margin: auto;
+            top: 22px;
+            right: 0;
+            bottom: 0;
+            left: 22px;
+            width: 12px;
+            height: 2px;
+            background: white;
+            transform: rotate(45deg);
+            transition: all .5s;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            margin: auto;
+            top: -5px;
+            right: 0;
+            bottom: 0;
+            left: -5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid white;
+            transition: all .5s;
+        }
+    }
+
+    input {
+        font-family: 'Inconsolata', monospace;
+        position: absolute;
+        margin: auto;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        border: none;
+        outline: none;
+        height: 50px !important;
+        background: rgba(60, 80, 232, 0.325);
+        color: white;
+        text-shadow: 0 0 10px rgba(103, 9, 28, 0.255);
+        padding: 0 80px 0 20px;
+        border-radius: 50px !important;
+        box-shadow: inset 0 0 25px 0 rgba(236, 97, 97, 0.5);
+        transition: all 1s;
+        opacity: 0;
+        z-index: 5;
+        font-weight: bolder;
+        letter-spacing: 0.1em;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:focus {
+            width: 300px;
+            opacity: 1;
+            cursor: text;
+        }
+
+        &:focus~.search {
+
+            background: #151515;
+            color: #FFFFFF;
+            z-index: 6;
+
+            &::before {
+                top: 0;
+                left: 0;
+                width: 25px;
+            }
+
+            &::after {
+                top: 0;
+                left: 0;
+                width: 25px;
+                height: 2px;
+                border: none;
+                background: white;
+                border-radius: 0%;
+                transform: rotate(-45deg);
+            }
+        }
+
+    }
+
+    ::placeholder {
+        color: #ffffff;
+    }
+}
+
+
+///////////// css of add user pop up /// 
+.user-profile-form {
+    .user-label {
+        label {
+            font-size: 16px;
+            align-items: center;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #1d1c1c;
+            font-family: 'Questrial', sans-serif;
+
+            span {
+                font-size: 20px;
+                color: #d0021bed;
+            }
+        }
+    }
+
+    .col-lg-12 {
+        padding-top: 20px;
+    }
+
+    .input-area {
+        padding-top: 5px;
+
+        input {
+            border: 1.5px solid #e2e2e2;
+        }
+    }
+
+    .input-file-type {
+        input {
+            padding: 12px;
+        }
+
+    }
+}
+
+/////// css for modal //////
+.deleteuserMsg {
+    margin-top: 10px !important;
+
+    span {
+        font-size: 17px;
+        font-weight: 600;
+        font-family: 'Questrial', sans-serif;
+        letter-spacing: 0.5px;
+
+    }
+}
+
+.modal-footer-area {
+    display: flex;
+    justify-content: end;
+    flex-direction: row-reverse;
+
+    button {
+        margin: {
+            right: 15px;
+            bottom: 20px;
+        }
+
+        background:rgb(7, 7, 111);
+        border: none;
+        color: #ffffff;
+        outline: none;
+
+        padding: {
+            left: 20px;
+            right: 20px;
+        }
+
+        font-size: 18px;
+        font-weight: 500;
+        letter-spacing: 1px;
+    }
+
+    margin-top: 20px !important;
+}
+
+.tabset {
+    margin-top: -20px;
+
+}
+
+.tabset>input[type="radio"] {
+    position: absolute;
+    left: -200vw;
+
+}
+
+.tabset .tab-panel {
+    display: none;
+
+    p {
+        font-size: 17px;
+        font-weight: 500;
+        font-family: 'Questrial', sans-serif;
+        letter-spacing: 1px;
+        line-height: 40px;
+    }
+}
+
+.tabset>input:first-child:checked~.tab-panels>.tab-panel:first-child,
+.tabset>input:nth-child(3):checked~.tab-panels>.tab-panel:nth-child(2),
+.tabset>input:nth-child(5):checked~.tab-panels>.tab-panel:nth-child(3) {
+    display: block;
+
+}
+
+
+.tabset>label {
+    position: relative;
+    display: inline-block;
+    padding: 15px 45px 25px;
+    border: 1px solid transparent;
+    border-bottom: 0;
+    cursor: pointer;
+    font-weight: 600;
+
+}
+
+.tabset>label::after {
+    content: "";
+    position: absolute;
+    left: 15px;
+    bottom: 10px;
+    width: 100px;
+    height: 4px;
+    background: #de0f0f;
+}
+
+.tabset>label:hover,
+.tabset>input:focus+label {
+    color: #06c;
+
+}
+
+.tabset>label:hover::after,
+.tabset>input:focus+label::after,
+.tabset>input:checked+label::after {
+    background: #06c;
+}
+
+.tabset>input:checked+label {
+    border-color: #eeb2b2;
+    border-bottom: 1px solid #fff;
+    margin-bottom: -1px;
+}
+
+.tab-panel {
+    padding: 10px 0;
+    border-top: 1px solid #ccc;
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+
+.tab-panel,
+.modal {
+    animation: slide-in 1s ease;
+}
+
+///////////////// Tooltip css ////////////////
+.tags {
+    display: inline;
+    position: relative;
+}
+
+.tags:hover:after {
+    background: #333;
+    background: rgba(0, 0, 0, .8);
+    border-radius: 5px;
+    bottom: -34px;
+    color: #fff;
+    content: attr(data-title);
+    left: 20%;
+    padding: 5px 15px;
+    position: absolute;
+    z-index: 98;
+    width: 300px;
+}
+
+.tags:hover:before {
+    border: solid;
+    border-color: #333 transparent;
+    border-width: 0 6px 6px 6px;
+    bottom: -4px;
+    content: "";
+    left: 50%;
+    position: absolute;
+    z-index: 99;
+}

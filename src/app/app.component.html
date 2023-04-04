@@ -1,0 +1,198 @@
+<div class="list-of-user-area">
+
+  <div class="search-area">
+    <div class="container">
+      <input type="text" placeholder="Search..." [(ngModel)]="searchTerm">
+      <div class="search"></div>
+    </div>
+    <!-- <input type="text" placeholder="Type here..." class="form-control" [(ngModel)]="searchTerm">&nbsp; -->
+    <div class="buttons">
+      <button class="blob-btn" (click)="openAddUserPopup()">
+        Add User
+        <span class="blob-btn__inner">
+          <span class="blob-btn__blobs">
+            <span class="blob-btn__blob"></span>
+            <span class="blob-btn__blob"></span>
+            <span class="blob-btn__blob"></span>
+            <span class="blob-btn__blob"></span>
+          </span>
+        </span>
+      </button>
+    </div>
+  </div>
+  <div class="tabset">
+    <!-- Tab 1 -->
+    <input type="radio" name="tabset" id="tab1" aria-controls="tab1" checked>
+    <label for="tab1">Tab 1</label>
+
+    <!-- Tab 2 -->
+    <input type="radio" name="tabset" id="tab2" aria-controls="tab2">
+    <label for="tab2">Tab 2</label>
+
+    <!-- Tab 3 -->
+    <input type="radio" name="tabset" id="tab3" aria-controls="tab3">
+    <label for="tab3">Tab 3</label>
+
+    <div class="tab-panels">
+      <section id="tab1" class="tab-panel">
+        <div class="table table-hover">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>User Name <a class="tags"  data-title="sorting alphabetically order"><i (click)="onSortClick($event)" class="fa-solid fa-chevron-up" ></i></a></th>
+              <th>Discription</th>
+              <th>Email</th>
+              <th>Phone No</th>
+              <th>Age </th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of userList | filter:searchTerm | paginate: { itemsPerPage: 2, currentPage: page }"
+              style="font-family: 'Questrial', sans-serif;letter-spacing: 1px; text-align: justify; ">
+              <td><img width="100%" [src]="data.image" class="image"></td>
+              <td>{{data.userName}}</td>
+              <td>{{data.userDiscription}}</td>
+              <td>{{data.email}}</td>
+              <td>{{data.phoneNo}}</td>
+              <td>{{data.age}}</td>
+              <td>
+                <button class="btn btn-sm glowingBtn" (click)="editUserById(data.userId)">
+                  <i class="fa-solid fa-pen"></i>
+                </button>&nbsp;
+
+                <button class="btn btn-sm glowingBtn" (click)="deleteUser(data.userId)">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </div>
+        <div class="row cssForPagination">
+          <pagination-controls (pageChange)="page = $event"></pagination-controls>
+        </div>
+      </section>
+      <section id="tab2" class="tab-panel">
+        <p style="padding: 20px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, aut voluptas
+          incidunt culpa maxime
+          neque, vero cupiditate voluptatem vel dignissimos, totam ad perspiciatis obcaecati repudiandae cum molestiae
+          nostrum enim sapiente!</p>
+      </section>
+      <section id="tab3" class="tab-panel">
+        <p style="padding: 20px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, aut voluptas
+          incidunt culpa maxime
+          neque, vero cupiditate voluptatem vel dignissimos, totam ad perspiciatis obcaecati repudiandae cum molestiae
+          nostrum enim sapiente Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum voluptatum hic
+          voluptatem nihil ab corrupti ullam aliquid ducimus ratione natus rem, obcaecati provident illo numquam atque
+          deleniti temporibus nobis a?</p>
+
+      </section>
+    </div>
+
+  </div>
+
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+
+        <div class="user-profile-form">
+          <div class="upload_image">
+            <h4>Upload Image</h4>
+            <input type="file" #myInput name="img" (change)="handleFileInput($event)" />
+
+          </div>
+          <form [formGroup]="AddUserForm">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="user-label">
+                  <label for="">User Name<span>*</span></label>
+                </div>
+                <div class="input-area">
+                  <input type="text" class="form-control" formControlName="name" placeholder="Enter Name">
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="user-label">
+                  <label for="">Description<span>*</span></label>
+                </div>
+                <div class="input-area">
+                  <textarea rows="5" class="form-control" formControlName="description"
+                    placeholder="Enter Description"></textarea>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="user-label">
+                  <label for="">Email<span>*</span></label>
+                </div>
+                <div class="input-area">
+                  <input type="email" class="form-control" formControlName="email" placeholder="Enter Email">
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="user-label">
+                  <label for="">Phone Number<span>*</span></label>
+                </div>
+                <div class="input-area">
+                  <input type="number" class="form-control" formControlName="number" placeholder="Enter Phone Number">
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="user-label">
+                  <label for="">Age<span>*</span></label>
+                </div>
+                <div class="input-area">
+                  <input type="number" class="form-control" formControlName="age" placeholder="Enter Age">
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer-area">
+          <button type="button" class="btn btn-secondary mt-1" (click)="hideModal()">Close</button>
+          <button *ngIf="updateUserBtn == false" type="button" class="btn btn-primary mt-1" (click)="addUser()">Add
+            User</button>
+          <button *ngIf="updateUserBtn == true" type="button" class="btn btn-primary mt-1" (click)="UpdateUser()">Update
+            User</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal FOR User DELETE -->
+<div class="modal fade" id="deleteUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body deleteuserMsg">
+        <span>Are You Sure Want To Delete?</span>
+      </div>
+      <div class="modal-footer-area">
+
+        <button type="button" class="btn" (click)="closeDeletePopup()">No</button>
+        <button type="button" class="btn" (click)="deleteUserById()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <defs>
+    <filter id="goo">
+      <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10"></feGaussianBlur>
+      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 21 -7" result="goo">
+      </feColorMatrix>
+      <feBlend in2="goo" in="SourceGraphic" result="mix"></feBlend>
+    </filter>
+  </defs>
+</svg>
