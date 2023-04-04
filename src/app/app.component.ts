@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 declare var jQuery: any;
-import { transition } from '../app/javaScriptFun.js';
 export interface userTable {
   userId: number;
   userName: string;
@@ -85,7 +84,6 @@ export class AppComponent implements OnInit {
   tobeUpdatedUserId: number | undefined;
   constructor(private formBuilder: FormBuilder,) { }
   ngOnInit(): void {
-    transition();
   }
   /// Update User Form ////////////
   AddUserForm = new FormGroup({
